@@ -50,9 +50,18 @@ public class Emeralds {
          * goods_img : /uploads/20180808/1a3c3ec77e6c798ace6b001e5bf3a123.jpg
          */
         private int ct_id;
+        private String incr_id;
         private int goods_id;
         private String goods_sn;
         private String goods_img;
+
+        public String getIncr_id() {
+            return incr_id;
+        }
+
+        public void setIncr_id(String incr_id) {
+            this.incr_id = incr_id;
+        }
 
         public int getCt_id() {
             return ct_id;

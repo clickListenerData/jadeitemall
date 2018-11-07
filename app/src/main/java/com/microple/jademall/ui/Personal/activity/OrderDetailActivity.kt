@@ -122,13 +122,14 @@ class OrderDetailActivity : BaseMvpActivity<OrderDetailPresenter>(),OrderDetailC
             tv_wuliufuwu.text="物流服务商     "+orderDetail.order_detail.shipping_name
         tv_wuliufeiyong.text="物流费用      "+orderDetail.order_detail.shipping_price+"元"
         tv_all_feiyong.text="总支付费用    "+orderDetail.order_detail.total_price+"元"
-        if (orderDetail.order_detail.buy_type==0){
-            tv_send_type.text="购买方式    邮寄"
-        }else if (orderDetail.order_detail.buy_type==1){
-            tv_send_type.text="购买方式    预约切石直播"
-        }else{
-            tv_send_type.text="购买方式    存入翡翠柜"
-        }
+//        if (orderDetail.order_detail.buy_type==0){
+//            tv_send_type.text="购买方式    邮寄"
+//        }else if (orderDetail.order_detail.buy_type==1){
+//            tv_send_type.text="购买方式    预约切石直播"
+//        }else{
+//            tv_send_type.text="购买方式    存入翡翠柜"
+//        }
+        tv_send_type.text="购买方式      "+orderDetail.order_detail.buy_type_name
         if (orderDetail.order_detail.shipping_no.isNullOrEmpty()){
             ll_wuliu.visibility=View.GONE
         }

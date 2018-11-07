@@ -13,5 +13,7 @@ import io.reactivex.Observable
  * describe:
  */
 class EmeraldsModel: EmeraldsContract.Model {
+    override fun getjifen(token: String)=AppApi.Api().getjifen(token)
+
     override fun getEmeralds(token: String): Observable<BaseResponseEntity<Emeralds>> = AppApi.Api().getEmeralds(token)
 }

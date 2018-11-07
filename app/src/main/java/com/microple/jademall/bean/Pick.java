@@ -20,6 +20,24 @@ public class Pick {
     private String type;
     private String remark;
     private String service_fee;
+    private int cut_status;
+    private String freight_price;
+
+    public int getCut_status() {
+        return cut_status;
+    }
+
+    public void setCut_status(int cut_status) {
+        this.cut_status = cut_status;
+    }
+
+    public String getFreight_price() {
+        return freight_price;
+    }
+
+    public void setFreight_price(String freight_price) {
+        this.freight_price = freight_price;
+    }
 
     public UserAddressBean getUser_address() {
         return user_address;

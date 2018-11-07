@@ -20,33 +20,45 @@
         android:layout_marginRight="10dp"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="40dp">
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/ll_content"
-            android:layout_width="wrap_content"
+            android:layout_width="140dp"
             android:layout_height="match_parent"
             android:background="@drawable/bg_live_title"
-            android:orientation="vertical"
             android:layout_marginLeft="10dp">
             <TextView
                 android:id="@+id/tv_livetitle"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:maxEms="6"
+                android:maxEms="4"
                 android:singleLine="true"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="@dimen/dp_4"
                 android:textSize="12sp"
-                android:textColor="@color/white_default" />
-            <TextView
-                android:id="@+id/tv_renshu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:textSize="10sp"
-                android:textColor="@color/white_default"
-                android:layout_marginTop="2dp"
-                android:layout_marginRight="@dimen/dp_4"/>
-        </LinearLayout>
+                android:textColor="@color/white_default"/>
+
+                <TextView
+                    android:id="@+id/tv_renshu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="10sp"
+                    android:textColor="@color/white_default"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="@dimen/dp_4"
+                    android:layout_below="@+id/tv_livetitle"
+                    android:layout_alignStart="@+id/tv_livetitle"/>
+                <TextView
+                    android:id="@+id/tv_follow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="11sp"
+                    android:textColor="@color/white_default"
+                    android:text="关注"
+                    android:background="@drawable/bg_follow"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    />
+        </RelativeLayout>
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/tv_user"
             android:layout_width="@dimen/dp_40"
@@ -65,35 +77,40 @@
                 android:layout_height="30dp"
                 android:src="@drawable/datouxiang_"
                 android:layout_marginLeft="3dp"
-                android:visibility="gone"/>
+                android:visibility="gone"
+                />
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/cr_two"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/datouxiang_"
                 android:layout_marginLeft="3dp"
-                android:visibility="gone"/>
+                android:visibility="gone"
+                />
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/cr_three"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/datouxiang_"
                 android:layout_marginLeft="3dp"
-                android:visibility="gone"/>
+                android:visibility="gone"
+                />
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/cr_four"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/datouxiang_"
                 android:layout_marginLeft="3dp"
-                android:visibility="gone"/>
+                android:visibility="gone"
+                />
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/cr_five"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/datouxiang_"
                 android:layout_marginLeft="3dp"
-                android:visibility="gone"/>
+                android:visibility="gone"
+                />
 
         </LinearLayout>
 
@@ -106,6 +123,15 @@
         android:layout_alignParentRight="true"
         android:layout_marginTop="52dp"
         android:layout_marginRight="10dp"/>
+    <ImageView
+        android:id="@+id/iv_service"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_service_n"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="120dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="13dp"/>
 
     <ImageView
         android:id="@+id/iv_share"

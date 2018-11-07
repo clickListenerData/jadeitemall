@@ -96,7 +96,7 @@ class LiveFragment : BaseMvpFragment<LiveContract.Model,LiveContract.View,LivePr
         rv_hotLive.isNestedScrollingEnabled = false
         mLiveHotAdapter.setOnItemClickListener { adapter, view, position ->
 //            LiveDetailsActivity.startLiveDetail(context!!,""+(adapter as LiveHotAdapter).data[position].live_id)
-            LivePlayerActivity.startLivePlayerActivity(context!!,""+(adapter as LiveHotAdapter).data[position].live_id,adapter.data[position].play_url[0],adapter.data[position].group_id,adapter.data[position].live_title,1,adapter.data[position].cover_img)
+            LivePlayerActivity.startLivePlayerActivity(context!!,""+(adapter as LiveHotAdapter).data[position].live_id,adapter.data[position].play_url[0],adapter.data[position].group_id,adapter.data[position].live_title,1,adapter.data[position].cover_img,""+adapter.data[position].supplier_id)
         }
 
 
@@ -110,7 +110,7 @@ class LiveFragment : BaseMvpFragment<LiveContract.Model,LiveContract.View,LivePr
         rv_reviewLive.isNestedScrollingEnabled = false
         mLiveReviewAdapter.notifyDataSetChanged()
         mLiveReviewAdapter.setOnItemClickListener { adapter, view, position ->
-            LivePlayerActivity.startLivePlayerActivity(context!!,""+(adapter as LiveReviewAdapter).data[position].lr_id,adapter.data[position].video_url,"",adapter.data[position].video_name,2,adapter.data[position].cover_img)
+            LivePlayerActivity.startLivePlayerActivity(context!!,""+(adapter as LiveReviewAdapter).data[position].lr_id,adapter.data[position].video_url,"",adapter.data[position].video_name,2,adapter.data[position].cover_img,""+adapter.data[position].supplier_id)
         }
 
 

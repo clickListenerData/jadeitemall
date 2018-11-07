@@ -80,7 +80,15 @@ public class OrderDetail {
         private int pick_pay;
         private String pick_pay_name;
         private String pick_time;
+        private String buy_type_name;
 
+        public String getBuy_type_name() {
+            return buy_type_name;
+        }
+
+        public void setBuy_type_name(String buy_type_name) {
+            this.buy_type_name = buy_type_name;
+        }
 
         public String getPick_time() {
             return pick_time;

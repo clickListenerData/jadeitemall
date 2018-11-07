@@ -13,8 +13,9 @@ import io.reactivex.Observable
  * describe:
  */
 class ApplicationModel: ApplicationContract.Model {
-    override fun apply(token: String, supplier_name: String, email: String, phone: String, inviter: String, license: String, attach: String): Observable<BaseResponseEntity<Any>> =
-            AppApi.Api().apply(token,supplier_name,email,phone,inviter,license,attach)
+    override fun apply(token: String, company_name: String, email: String, phone: String, inviter: String, license: String, attach: String, supplier_name: String, head_img: String, intro: String)=
+            AppApi.Api().apply(token,company_name,email,phone,inviter,license,attach,supplier_name,head_img,intro)
+
 
     override fun getImage(upload_img: String): Observable<BaseResponseEntity<Image>> =AppApi.Api().getImage(upload_img)
 }

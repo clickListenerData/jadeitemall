@@ -18,9 +18,12 @@ interface EmeraldsContract {
     }
     interface Model{
         fun getEmeralds(token:String): Observable<BaseResponseEntity<Emeralds>>
+        fun getjifen(token: String): Observable<BaseResponseEntity<Emeralds>>
+
 
     }
     abstract class Presenter:BaseMvpPresenter<Model, View>(){
         abstract fun getEmeralds(token:String)
+        abstract  fun getjifen(token: String)
     }
 }

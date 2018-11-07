@@ -7,6 +7,7 @@ import com.chad.library.adapter.base.BaseViewHolder
 import com.microple.jademall.R
 import com.microple.jademall.bean.Team
 import com.microple.jademall.common.Constant
+import com.microple.jademall.uitls.loadHeadImag
 import com.microple.jademall.uitls.loadImag
 
 /**
@@ -25,6 +26,6 @@ class TeamAdapter(data:List<Team.UserListBean>):BaseQuickAdapter<Team.UserListBe
         helper?.setText(R.id.tv_name,item?.user_name    +"ID"+item?.user_id)
         helper?.setText(R.id.tv_phone,item?.phone)
         helper?.setText(R.id.tv_Price,"产生佣金    "+item?.divide_money)
-        helper?.getView<ImageView>(R.id.iv_goodsImage)?.loadImag(item?.head_img!!)
+        helper?.getView<ImageView>(R.id.iv_goodsImage)?.loadHeadImag(item?.head_img!!)
     }
 }

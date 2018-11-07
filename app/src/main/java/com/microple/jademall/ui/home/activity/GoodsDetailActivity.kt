@@ -112,6 +112,7 @@ class GoodsDetailActivity : BaseMvpActivity<GoodsDetailPresenter>(),GoodsDetailC
     override fun initData() {
         (application as App).addActivity(this)
         var goods_sn=intent.getStringExtra("goods_sn")
+        Log.i("goods_snddd",goods_sn)
         if (Constants.isLogin()){
             getPresenter().getDetail(Constants.getToken(),goods_sn)
         }else{
@@ -210,15 +211,15 @@ class GoodsDetailActivity : BaseMvpActivity<GoodsDetailPresenter>(),GoodsDetailC
                 showLoadingDialog()
                 getPresenter().collection(Constants.getToken(),""+goodsDetail?.goods_info?.goods_id)
             }else{
-                showToast("请先登录")
+                LoginActivity.startLoginActivity(this)
             }
         }
         iv_car.setOnClickListener{
             if (Constants.isLogin()){
                 showLoadingDialog()
-                getPresenter().addShoping(Constants.getToken(),""+goodsDetail?.goods_info?.goods_id)
+                    getPresenter().addShoping(Constants.getToken(),""+goodsDetail?.goods_info?.goods_id)
             }else{
-                showToast("请先登录")
+                LoginActivity.startLoginActivity(this)
             }
         }
         iv_kefu.setOnClickListener {

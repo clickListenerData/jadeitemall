@@ -98,18 +98,27 @@ class ImOrderActivity : BaseMvpActivity<ImOrderPresenter>(),ImOrderContract.View
      */
      var adapter=ImOrderAdapter(arrayListOf())
     var you_list= arrayListOf<String>()
+    var youdao_list= arrayListOf<String>()
     var live_list= arrayListOf<String>()
     var feicui_list= arrayListOf<String>()
+    var oneYear_list= arrayListOf<String>()
+    var twoYear_list= arrayListOf<String>()
+    var fiveYear_llist= arrayListOf<String>()
     var you=""
     var live=""
     var feicui=""
+    var oneYear=""
+    var twoYear=""
+    var fiveYear=""
+    var youdao=""
+
+
     override fun onDestroy() {
         super.onDestroy()
         (application as App).deleteActivity(this)
     }
     override fun initData() {
         tv_title.text="立即下单"
-        Log.i("goodsID",intent.getStringExtra("goods_id"))
         getPresenter().imOrder(Constants.getToken(),intent.getStringExtra("sb_id"),intent.getStringExtra("goods_id"))
         (application as App).addActivity(this)
         XxAnyPay.intance.init(this)
@@ -138,6 +147,15 @@ class ImOrderActivity : BaseMvpActivity<ImOrderPresenter>(),ImOrderContract.View
                                     live_list.remove(goods.goods_sn)
                                 }else if (feicui_list.contains(goods.goods_sn)){
                                     feicui_list.remove(goods.goods_sn)
+                                } else if(oneYear_list.contains(goods.goods_sn)){
+                                    oneYear_list.remove(goods.goods_sn)
+                                }else if(twoYear_list.contains(goods.goods_sn)){
+                                    twoYear_list.remove(goods.goods_sn)
+                                }else if (fiveYear_llist.contains(goods.goods_sn)){
+                                    fiveYear_llist.remove(goods.goods_sn)
+                                }
+                                else if (youdao_list.contains(goods.goods_sn)){
+                                    youdao_list.remove(goods.goods_sn)
                                 }
                             }
                             2->{//直播
@@ -148,6 +166,14 @@ class ImOrderActivity : BaseMvpActivity<ImOrderPresenter>(),ImOrderContract.View
                                     you_list.remove(goods.goods_sn)
                                 }else if (feicui_list.contains(goods.goods_sn)){
                                     feicui_list.remove(goods.goods_sn)
+                                }else if(oneYear_list.contains(goods.goods_sn)){
+                                    oneYear_list.remove(goods.goods_sn)
+                                }else if(twoYear_list.contains(goods.goods_sn)){
+                                    twoYear_list.remove(goods.goods_sn)
+                                }else if (fiveYear_llist.contains(goods.goods_sn)){
+                                    fiveYear_llist.remove(goods.goods_sn)
+                                } else if (youdao_list.contains(goods.goods_sn)){
+                                    youdao_list.remove(goods.goods_sn)
                                 }
                             }
                             3->{//存入翡翠柜
@@ -158,12 +184,99 @@ class ImOrderActivity : BaseMvpActivity<ImOrderPresenter>(),ImOrderContract.View
                                     you_list.remove(goods.goods_sn)
                                 }else if (live_list.contains(goods.goods_sn)){
                                     live_list.remove(goods.goods_sn)
+                                }else if(oneYear_list.contains(goods.goods_sn)){
+                                    oneYear_list.remove(goods.goods_sn)
+                                }else if(twoYear_list.contains(goods.goods_sn)){
+                                    twoYear_list.remove(goods.goods_sn)
+                                }else if (fiveYear_llist.contains(goods.goods_sn)){
+                                    fiveYear_llist.remove(goods.goods_sn)
+                                } else if (youdao_list.contains(goods.goods_sn)){
+                                    youdao_list.remove(goods.goods_sn)
+                                }
+                            }
+                            4->{
+                                if (!oneYear_list.contains(goods.goods_sn)){
+                                    oneYear_list.add(goods.goods_sn)
+                                }
+                                if (you_list.contains(goods.goods_sn)){
+                                    you_list.remove(goods.goods_sn)
+                                }else if (live_list.contains(goods.goods_sn)){
+                                    live_list.remove(goods.goods_sn)
+                                }else if(feicui_list.contains(goods.goods_sn)){
+                                    feicui_list.remove(goods.goods_sn)
+                                }else if(twoYear_list.contains(goods.goods_sn)){
+                                    twoYear_list.remove(goods.goods_sn)
+                                }else if (fiveYear_llist.contains(goods.goods_sn)){
+                                    fiveYear_llist.remove(goods.goods_sn)
+                                } else if (youdao_list.contains(goods.goods_sn)){
+                                    youdao_list.remove(goods.goods_sn)
+                                }
+
+                            }
+                            5->{
+                                if (!twoYear_list.contains(goods.goods_sn)){
+                                    twoYear_list.add(goods.goods_sn)
+                                }
+                                if (you_list.contains(goods.goods_sn)){
+                                    you_list.remove(goods.goods_sn)
+                                }else if (live_list.contains(goods.goods_sn)){
+                                    live_list.remove(goods.goods_sn)
+                                }else if(feicui_list.contains(goods.goods_sn)){
+                                    feicui_list.remove(goods.goods_sn)
+                                }else if(oneYear_list.contains(goods.goods_sn)){
+                                    oneYear_list.remove(goods.goods_sn)
+                                }else if (fiveYear_llist.contains(goods.goods_sn)){
+                                    fiveYear_llist.remove(goods.goods_sn)
+                                } else if (youdao_list.contains(goods.goods_sn)){
+                                    youdao_list.remove(goods.goods_sn)
+                                }
+
+                            }
+                            6->{
+                                if (!fiveYear_llist.contains(goods.goods_sn)){
+                                    fiveYear_llist.add(goods.goods_sn)
+                                }
+                                if (you_list.contains(goods.goods_sn)){
+                                    you_list.remove(goods.goods_sn)
+                                }else if (live_list.contains(goods.goods_sn)){
+                                    live_list.remove(goods.goods_sn)
+                                }else if(feicui_list.contains(goods.goods_sn)){
+                                    feicui_list.remove(goods.goods_sn)
+                                }else if(oneYear_list.contains(goods.goods_sn)){
+                                    oneYear_list.remove(goods.goods_sn)
+                                }else if (twoYear_list.contains(goods.goods_sn)){
+                                    twoYear_list.remove(goods.goods_sn)
+                                } else if (youdao_list.contains(goods.goods_sn)){
+                                    youdao_list.remove(goods.goods_sn)
+                                }
+
+                            }
+                            7->{
+                                if (!youdao_list.contains(goods.goods_sn)){
+                                    youdao_list.add(goods.goods_sn)
+                                }
+                                if (you_list.contains(goods.goods_sn)){
+                                    you_list.remove(goods.goods_sn)
+                                }else if (live_list.contains(goods.goods_sn)){
+                                    live_list.remove(goods.goods_sn)
+                                }else if(feicui_list.contains(goods.goods_sn)){
+                                    feicui_list.remove(goods.goods_sn)
+                                }else if(oneYear_list.contains(goods.goods_sn)){
+                                    oneYear_list.remove(goods.goods_sn)
+                                }else if (twoYear_list.contains(goods.goods_sn)){
+                                    twoYear_list.remove(goods.goods_sn)
+                                } else if (fiveYear_llist.contains(goods.goods_sn)){
+                                    fiveYear_llist.remove(goods.goods_sn)
                                 }
                             }
                          }
                         you=""
                         live=""
                         feicui=""
+                        oneYear=""
+                        twoYear=""
+                        fiveYear=""
+                        youdao=""
                         if (you_list.size!=0){
                             tv_youji.visibility=View.VISIBLE
                             for (i in 0..you_list.size-1){
@@ -172,7 +285,7 @@ class ImOrderActivity : BaseMvpActivity<ImOrderPresenter>(),ImOrderContract.View
                                 else
                                     you=you+"/"+you_list[i]
                             }
-                            tv_youji.text="邮寄:   "+you
+                            tv_youji.text="邮寄(运费现付):   "+you
                         }else{
                             tv_youji.visibility=View.GONE
                         }
@@ -200,8 +313,72 @@ class ImOrderActivity : BaseMvpActivity<ImOrderPresenter>(),ImOrderContract.View
                         }else{
                             tv_cun.visibility=View.GONE
                         }
+                        if (oneYear_list.size!=0){
+                            tv_one.visibility=View.VISIBLE
+                            for (i in 0..oneYear_list.size-1){
+                                if (i==0){
+                                    oneYear=oneYear_list[i]
+                                }else{
+                                    oneYear=oneYear+"/"+oneYear_list[i]
+                                }
+                                tv_one.text="一年积分增值:    "+oneYear
+                            }
+
+                        }else{
+                            tv_one.visibility=View.GONE
+                        }
+                        if (twoYear_list.size!=0){
+                            tv_two.visibility=View.VISIBLE
+                            for (i in 0..twoYear_list.size-1){
+                                if (i==0){
+                                    twoYear=twoYear_list[i]
+                                }else{
+                                    twoYear=twoYear+"/"+twoYear_list[i]
+                                }
+                                tv_two.text="两年积分增值:    "+twoYear
+                            }
+
+                        }else{
+                            tv_two.visibility=View.GONE
+                        }
+                        if (fiveYear_llist.size!=0){
+                            tv_five.visibility=View.VISIBLE
+                            for (i in 0..fiveYear_llist.size-1){
+                                if (i==0){
+                                    fiveYear=fiveYear_llist[i]
+                                }else{
+                                    fiveYear=fiveYear+"/"+fiveYear_llist[i]
+                                }
+                                tv_five.text="五年积分增值:    "+fiveYear
+                            }
+
+                        }else{
+                            tv_five.visibility=View.GONE
+                        }
+                        if (youdao_list.size!=0){
+                            tv_youji_dao.visibility=View.VISIBLE
+                            for (i in 0..youdao_list.size-1){
+                                if (i==0){
+                                    youdao=youdao_list[i]
+                                }else{
+                                    youdao=youdao+"/"+youdao_list[i]
+                                }
+                                tv_youji_dao.text="邮寄(运费到付):    "+youdao
+                            }
+
+                        }else{
+                            tv_youji_dao.visibility=View.GONE
+                        }
+
                         dialog.dismiss()
-                        getPresenter().getOrderInfo(Constants.getToken(),you,live,feicui)
+                        Log.i("you",you)
+                        Log.i("live",live)
+                        Log.i("oneYear",oneYear)
+                        Log.i("twoYear",twoYear)
+                        Log.i("fiveYear",fiveYear+fiveYear_llist.size)
+                        Log.i("feicui",feicui)
+                        Log.i("youdao",youdao+youdao_list.size)
+                        getPresenter().getOrderInfo(Constants.getToken(),you,live,feicui,oneYear,twoYear,fiveYear,youdao)
                     }
 
                 })
@@ -222,10 +399,9 @@ class ImOrderActivity : BaseMvpActivity<ImOrderPresenter>(),ImOrderContract.View
     override fun initEvent() {
         tv_submint.setOnClickListener{
             var dialog=PayDialog(this)
-            if (you_list.size+live_list.size+feicui_list.size!=adapter.data.size){
+            if (you_list.size+live_list.size+feicui_list.size+oneYear_list.size+twoYear_list.size+fiveYear_llist.size+youdao_list.size!=adapter.data.size){
                 showToast("请选择购买方式")
-            }
-            else if (order?.order!!.user_address.ua_id==null){
+            } else if (order?.order!!.user_address.ua_id==null){
                 showToast("请添加地址")
             }else{
                 dialog.show()
@@ -237,15 +413,15 @@ class ImOrderActivity : BaseMvpActivity<ImOrderPresenter>(),ImOrderContract.View
                             1->{
                                 indexs=1
                                 showLoadingDialog()
-                                getPresenter().pay(Constants.getToken(),you,live,feicui,""+order?.order!!.user_address.ua_id,"1","",intent.getStringExtra("sb_id"),"2","")
+                                getPresenter().pay(Constants.getToken(),you,live,feicui,""+order?.order!!.user_address.ua_id,"1","",intent.getStringExtra("sb_id"),oneYear,twoYear,fiveYear,youdao)
                             }
                             2->{
-                                if (add_address.visibility==0){
+                                if (add_address.visibility==View.VISIBLE){
                                     showToast("请添加地址")
                                 }else{
                                     indexs=2
                                     showLoadingDialog()
-                                    getPresenter().pay(Constants.getToken(),you,live,feicui,""+order?.order!!.user_address.ua_id,"2","",intent.getStringExtra("sb_id"),"2","")
+                                    getPresenter().pay(Constants.getToken(),you,live,feicui,""+order?.order!!.user_address.ua_id,"2","",intent.getStringExtra("sb_id"),oneYear,twoYear,fiveYear,youdao)
                                 }
 
 
@@ -258,6 +434,9 @@ class ImOrderActivity : BaseMvpActivity<ImOrderPresenter>(),ImOrderContract.View
                                     PassswordActivity.startPassswordActivity(this@ImOrderActivity,2)
                                 }
 
+                            }
+                            4->{//他人代付
+                                DaifuActivity.startDaifuActivity(mContext,intent.getStringExtra("sb_id"),you,youdao,live,feicui,oneYear,twoYear,fiveYear,order?.order?.user_address?.ua_id!!)
                             }
                         }
                     }
@@ -300,7 +479,7 @@ class ImOrderActivity : BaseMvpActivity<ImOrderPresenter>(),ImOrderContract.View
                 you=you+"/"+you_list[i]
         }
         tv_youji.visibility=View.VISIBLE
-        tv_youji.text="邮寄:   "+you
+        tv_youji.text="邮寄(运费现付):   "+you
         tv_wuliu.text="物流费用:  ￥"+imOrder.order.shipping_fee
         if (imOrder.order.user_address.address.isNullOrEmpty()){
             add_address.visibility=View.VISIBLE
@@ -333,10 +512,8 @@ class ImOrderActivity : BaseMvpActivity<ImOrderPresenter>(),ImOrderContract.View
         }
         psw_view.setOnInputFinishListener{
             password=it
-//            dialog!!.dismiss()
             showLoadingDialog()
-            getPresenter().pay(Constants.getToken(),you,live,feicui,""+order?.order!!.user_address.ua_id,"3",password!!.md5Salt(),intent.getStringExtra("sb_id"),"2","")
-
+            getPresenter().pay(Constants.getToken(),you,live,feicui,""+order?.order!!.user_address.ua_id,"3",password!!.md5Salt(),intent.getStringExtra("sb_id"),oneYear,twoYear,fiveYear,youdao)
         }
         dialog = AlertDialog.Builder(mContext).create()
         dialog!!.setView(view)

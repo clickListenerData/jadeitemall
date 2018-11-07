@@ -20,11 +20,11 @@ interface PickGoodsContract {
     }
     interface Model{
         fun pick(token:String,ct_id:String): Observable<BaseResponseEntity<Pick>>
-        fun pay(token:String,send:String,live:String,cabinet:String,address_id:String,pay_type:String,trade_password:String,sb_id:String,pick_type:String,ct_id:String  ):Observable<BaseResponseEntity<Pay>>
+        fun pay(token:String,pay_type:String,address_id:String,cabinet_id:String,shipping_pay:String):Observable<BaseResponseEntity<Pay>>
 
     }
     abstract class Presenter:BaseMvpPresenter<Model, View>(){
         abstract fun pick(token:String,ct_id:String)
-        abstract fun pay(token:String,send:String,live:String,cabinet:String,address_id:String,pay_type:String,trade_password:String,sb_id:String,pick_type:String,ct_id:String)
+        abstract fun pay(token:String,pay_type:String,address_id:String,cabinet_id:String,shipping_pay:String)
     }
 }

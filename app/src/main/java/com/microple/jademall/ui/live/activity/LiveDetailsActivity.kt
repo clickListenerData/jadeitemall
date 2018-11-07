@@ -59,7 +59,7 @@ class LiveDetailsActivity : BaseMvpActivity<LiveDetailPresenter>(),LiveDetailCon
                         .error(R.drawable.ic_img_default)
                 .into(iv_live)
         iv_player.setOnClickListener{
-                LivePlayerActivity.startLivePlayerActivity(this,intent.getStringExtra("live_id"),liveDetail?.detail!!.play_url[0]!!,"",liveDetail?.detail?.live_title!!,1,liveDetail!!.detail.cover_img)
+                LivePlayerActivity.startLivePlayerActivity(this,intent.getStringExtra("live_id"),liveDetail?.detail!!.play_url[0]!!,liveDetail?.detail!!.group_id,liveDetail?.detail?.live_title!!,1,liveDetail!!.detail.cover_img,""+liveDetail?.detail?.supplier_id)
         }
     }
 

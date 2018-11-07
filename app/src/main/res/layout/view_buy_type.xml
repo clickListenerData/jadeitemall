@@ -42,7 +42,27 @@
                 android:textColor="@color/blue_007AFF"
                 android:gravity="center"
                 android:textSize="@dimen/sp_17"
-                android:text="邮寄"/>
+                android:text="邮寄(运费现付)"/>
+        </LinearLayout>
+        <View
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/line_C8C7CC" />
+        <LinearLayout
+            android:id="@+id/ll_youji_dao"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true"
+            android:layout_height="50dp">
+            <TextView
+                android:id="@+id/tv_youji_dao"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/blue_007AFF"
+                android:gravity="center"
+                android:textSize="@dimen/sp_17"
+                android:text="邮寄(运费到付)"/>
         </LinearLayout>
         <View
             android:layout_alignParentBottom="true"
@@ -85,7 +105,69 @@
                 android:textSize="@dimen/sp_17"
                 android:text="存入翡翠柜"/>
         </LinearLayout>
+        <View
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/line_C8C7CC" />
 
+        <LinearLayout
+            android:id="@+id/ll_one"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true"
+            android:layout_height="50dp">
+            <TextView
+                android:id="@+id/tv_one"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/blue_007AFF"
+                android:gravity="center"
+                android:textSize="@dimen/sp_17"
+                android:text="一年积分增值"/>
+        </LinearLayout>
+        <View
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/line_C8C7CC" />
+
+        <LinearLayout
+            android:id="@+id/ll_two"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true"
+            android:layout_height="50dp">
+            <TextView
+                android:id="@+id/tv_two"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/blue_007AFF"
+                android:gravity="center"
+                android:textSize="@dimen/sp_17"
+                android:text="两年积分增值"/>
+        </LinearLayout>
+        <View
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/line_C8C7CC" />
+
+        <LinearLayout
+            android:id="@+id/ll_five"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true"
+            android:layout_height="50dp">
+            <TextView
+                android:id="@+id/tv_five"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/blue_007AFF"
+                android:gravity="center"
+                android:textSize="@dimen/sp_17"
+                android:text="五年积分增值"/>
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

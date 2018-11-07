@@ -1,31 +1,21 @@
 package com.microple.jademall.ui.shoppingcar
 
 import android.support.v4.widget.NestedScrollView
-import android.support.v4.widget.SlidingPaneLayout
-import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.util.Log
-import android.view.MotionEvent
 import android.view.View
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.microple.jademall.MainActivity
 import com.microple.jademall.R
-import com.microple.jademall.bean.Goods
 import com.microple.jademall.bean.Shop
-import com.microple.jademall.common.Constant
 import com.microple.jademall.common.Constants
 import com.microple.jademall.ui.Personal.activity.LoginActivity
 import com.microple.jademall.ui.home.activity.GoodsDetailActivity
 import com.microple.jademall.ui.home.activity.ImOrderActivity
-import com.microple.jademall.ui.home.adapter.HomeGoodsAdapter
-import com.microple.jademall.ui.home.adapter.ImOrderAdapter
-import com.microple.jademall.ui.shoppingcar.adapter.LeftAdapter
 import com.microple.jademall.ui.shoppingcar.adapter.ShoppingAdapter
 import com.microple.jademall.ui.shoppingcar.mvp.contract.ShoppingCarContract
 import com.microple.jademall.ui.shoppingcar.mvp.presenter.ShoppingCarPresenter
 import com.microple.jademall.uitls.loadHeadImag
-import com.microple.jademall.uitls.loadImag
 import com.xx.baseuilibrary.mvp.BaseMvpFragment
 import kotlinx.android.synthetic.main.fragment_shoppingcar.*
 import kotlinx.android.synthetic.main.fragment_tool_bar.*
@@ -171,6 +161,8 @@ class ShoppingCarFragment : BaseMvpFragment<ShoppingCarContract.Model,ShoppingCa
             }else{
                 view_login.visibility=View.VISIBLE
                 iv_head.setImageResource(R.drawable.datouxiang_)
+                LoginActivity.startLoginActivity(context!!)
+                showToast("请先登录")
             }
         }
     }

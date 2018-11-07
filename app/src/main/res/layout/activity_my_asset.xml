@@ -133,11 +133,18 @@
             android:layout_marginRight="@dimen/dp_13"
             android:layout_alignParentBottom="true"/>
     </RelativeLayout>
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginLeft="@dimen/dp_13"
+        android:layout_marginRight="@dimen/dp_13"
+        android:layout_alignParentBottom="true"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="23dp">
+        android:layout_marginBottom="23dp">
         <TextView
             android:id="@+id/tv_detail"
             android:layout_width="0dp"
@@ -175,6 +182,20 @@
             android:textColor="@color/green_06A366"
             android:gravity="center"
             android:drawableTop="@drawable/btn_cabinet_n"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:textSize="@dimen/sp_15"
+            android:drawablePadding="14dp"
+            />
+        <TextView
+            android:id="@+id/tv_jifen"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="积分柜"
+            android:textColor="@color/green_06A366"
+            android:gravity="center"
+            android:drawableTop="@drawable/btn_integral_n"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:textSize="@dimen/sp_15"

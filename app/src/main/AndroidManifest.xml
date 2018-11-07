@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.microple.jademall">
+
     <uses-permission android:name="com.microple.jademall.permission.JPUSH_MESSAGE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -99,8 +100,7 @@
             android:name="com.umeng.socialize.media.WBShareCallBackActivity"
             android:configChanges="keyboardHidden|orientation"
             android:exported="false"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-      />
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name="com.sina.weibo.sdk.web.WeiboSdkWebActivity"
             android:configChanges="keyboardHidden|orientation"
@@ -116,17 +116,15 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <!--  腾讯云IM消息收发 service -->
+        <!-- 腾讯云IM消息收发 service -->
         <service
             android:name="com.tencent.qalsdk.service.QalService"
             android:exported="true"
-            android:process=":QALSERVICE" >
-        </service>
+            android:process=":QALSERVICE" />
         <service
             android:name="com.tencent.qalsdk.service.QalAssistService"
             android:exported="false"
-            android:process=":QALSERVICE" >
-        </service>
+            android:process=":QALSERVICE" />
 
         <!-- 【必须】 离线消息广播接收器 -->
         <receiver
@@ -137,7 +135,8 @@
             </intent-filter>
         </receiver>
         <receiver
-            android:name="com.tencent.qalsdk.core.NetConnInfoCenter" android:process=":QALSERVICE">
+            android:name="com.tencent.qalsdk.core.NetConnInfoCenter"
+            android:process=":QALSERVICE">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
@@ -156,6 +155,7 @@
                 <action android:name="com.tencent.qalsdk.service.TASK_REMOVED" />
             </intent-filter>
         </receiver>
+
         <activity
             android:name=".SplashActivity"
             android:theme="@style/MainTheme">
@@ -233,7 +233,12 @@
         <activity android:name=".ui.live.activity.LivePlayerActivity" />
         <activity android:name=".GuideActivity" />
         <activity android:name=".ui.live.activity.LiveGoodsActivity" />
-        <activity android:name=".ui.home.activity.WebViewActivity"></activity>
+        <activity android:name=".ui.home.activity.WebViewActivity" />
+        <activity android:name=".ui.Personal.activity.IgRecordActivity" />
+        <activity android:name=".ui.Personal.activity.MyAttentionActivity" />
+        <activity android:name=".ui.home.activity.DaifuActivity" />
+        <activity android:name=".ui.Personal.activity.OtherPayActivity" />
+        <activity android:name=".ui.Personal.activity.MyAttentionDetailActivity"></activity>
     </application>
 
 </manifest>

@@ -15,6 +15,18 @@ import io.reactivex.Observable
  * describe:
  */
 class EmeraldsPresenter:EmeraldsContract.Presenter() {
+    override fun getjifen(token: String) {
+        getView()?.showLoadingDialog()
+        getModel().getjifen(token).ui({
+            getView()?.getEmeralds(it.data!!)
+            getView()?.dismissLoadingDialog()
+        },{
+            getView()?.showToast(it.message)
+            getView()?.dismissLoadingDialog()
+
+        })
+    }
+
     override fun getEmeralds(token: String) {
         getModel().getEmeralds(token).ui({
             getView()?.getEmeralds(it.data!!)

@@ -63,12 +63,23 @@
                 android:id="@+id/tv_youji"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="邮寄"
+                android:text="邮寄(运费现付)"
                 android:textColor="@color/black_0B0827"
                 android:textSize="@dimen/sp_14"
                 android:layout_marginLeft="@dimen/dp_13"
                 android:layout_marginTop="10dp"
                 android:visibility="gone"/>
+            <TextView
+                android:id="@+id/tv_youji_dao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="邮寄(运费到付)"
+                android:textColor="@color/black_0B0827"
+                android:textSize="@dimen/sp_14"
+                android:layout_marginLeft="@dimen/dp_13"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"/>
+
             <TextView
                 android:id="@+id/tv_zhibo"
                 android:layout_width="wrap_content"
@@ -84,6 +95,36 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="存入翡翠柜"
+                android:textColor="@color/black_0B0827"
+                android:textSize="@dimen/sp_14"
+                android:layout_marginLeft="@dimen/dp_13"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/tv_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="增值类型一：一年增值"
+                android:textColor="@color/black_0B0827"
+                android:textSize="@dimen/sp_14"
+                android:layout_marginLeft="@dimen/dp_13"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/tv_two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="增值类型二：两年增值"
+                android:textColor="@color/black_0B0827"
+                android:textSize="@dimen/sp_14"
+                android:layout_marginLeft="@dimen/dp_13"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/tv_five"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="增值类型三：五年增值"
                 android:textColor="@color/black_0B0827"
                 android:textSize="@dimen/sp_14"
                 android:layout_marginLeft="@dimen/dp_13"

@@ -51,10 +51,17 @@ public class PayDialog extends Dialog implements View.OnClickListener {
         view.findViewById(R.id.ll_jifen).setOnClickListener(this);
         view.findViewById(R.id.ll_alipay).setOnClickListener(this);
         view.findViewById(R.id.ll_wx).setOnClickListener(this);
+        view.findViewById(R.id.ll_daifu).setOnClickListener(this);
         setContentView(view);
     }
     public void setVis(){
         view.findViewById(R.id.ll_jifen).setVisibility(View.GONE);
+        view.findViewById(R.id.ll_daifu).setVisibility(View.GONE);
+
+    }
+    public void setDaifuVis(){
+        view.findViewById(R.id.ll_daifu).setVisibility(View.GONE);
+
     }
 
 
@@ -84,6 +91,10 @@ public class PayDialog extends Dialog implements View.OnClickListener {
                     mOnBtnClickListener.cancel(3);
                 }
                 break;
+            case R.id.ll_daifu :
+                if (mOnBtnClickListener!=null){
+                    mOnBtnClickListener.cancel(4);
+                }
         }
     }
 

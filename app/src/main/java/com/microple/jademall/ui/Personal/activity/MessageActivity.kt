@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.google.gson.Gson
 import com.microple.jademall.R
 import com.microple.jademall.bean.MyMessage
 import com.microple.jademall.common.Constants
@@ -43,12 +44,16 @@ class MessageActivity : BaseMvpActivity<MessagePresenter>(),MessageContract.View
     var adapter= MessageAdapter(arrayListOf())
     override fun initData() {
         tv_title.text="消息列表"
-        getPresenter().getMessage(Constants.getToken())
+
         adapter.openLoadAnimation(BaseQuickAdapter.SCALEIN)
         recyclerView.layoutManager= LinearLayoutManager(this)
         recyclerView.adapter=adapter
         adapter.setOnItemClickListener { adapter, view, position ->
-            MessageDetailActivity.startMessageDetailActivity(this,""+(adapter as MessageAdapter).data[position].msg_id)
+           if ((adapter as MessageAdapter).data[position].type==2){
+               OtherPayActivity.startOtherPayActivity(this,Gson().toJson(adapter.data[position].msg_param),adapter.data[position].user_id,adapter.data[position].msg_content)
+           }else{
+               MessageDetailActivity.startMessageDetailActivity(this,""+(adapter as MessageAdapter).data[position].msg_id)
+           }
         }
     }
 
@@ -59,6 +64,11 @@ class MessageActivity : BaseMvpActivity<MessagePresenter>(),MessageContract.View
         iv_back.setOnClickListener{
             finish()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getPresenter().getMessage(Constants.getToken())
     }
 
     override fun getMessage(myMessage: MyMessage) {

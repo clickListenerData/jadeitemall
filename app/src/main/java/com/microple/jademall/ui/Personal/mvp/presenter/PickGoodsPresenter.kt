@@ -11,14 +11,14 @@ import com.weibiaogan.litong.extensions.ui
  * describe:
  */
 class PickGoodsPresenter:PickGoodsContract.Presenter() {
-    override fun pay(token: String, send: String, live: String, cabinet: String, address_id: String, pay_type: String, trade_password: String, sb_id: String, pick_type: String, ct_id: String) {
-        getModel().pay(token,send,live,cabinet,address_id,pay_type,trade_password,sb_id,pick_type,ct_id).ui({
+    override fun pay(token: String, pay_type: String, address_id: String, cabinet_id: String, shipping_pay: String) {
+        getModel().pay(token,pay_type,address_id,cabinet_id,shipping_pay).ui({
             getView()?.pay(it.data!!)
         },{
-            getView()?.showToast(it)
+            getView()?.showToast(it.message)
         })
-
     }
+
 
     override fun pick(token: String, ct_id: String) {
         getModel().pick(token,ct_id).ui({

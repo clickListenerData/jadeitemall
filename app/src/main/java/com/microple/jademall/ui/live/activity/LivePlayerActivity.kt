@@ -5,8 +5,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.os.Message
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
@@ -14,11 +12,13 @@ import android.view.WindowManager
 import android.widget.ImageView
 import com.microple.jademall.BuildConfig
 import com.microple.jademall.R
+import com.microple.jademall.bean.Follow
 import com.microple.jademall.bean.LiveGoods
 import com.microple.jademall.bean.LiveShare
 import com.microple.jademall.common.App
 import com.microple.jademall.common.Constants
 import com.microple.jademall.dialog.ShareDialog
+import com.microple.jademall.ui.Personal.activity.CustomerServiceAcitivity
 import com.microple.jademall.ui.live.adapter.MessageAdapter
 import com.microple.jademall.ui.live.mvp.contract.LivePlayerContract
 import com.microple.jademall.ui.live.mvp.presenter.LivePlayerPresenter
@@ -45,6 +45,21 @@ import com.xx.baseuilibrary.mvp.BaseMvpActivity
 import kotlinx.android.synthetic.main.activity_live_player.*
 
 class LivePlayerActivity : BaseMvpActivity<LivePlayerPresenter>(),LivePlayerContract.View {
+    override fun isFollow(follow: Follow) {
+        Log.i("isFollow",""+follow.is_follow)
+        if (follow.is_follow==1){
+            tv_follow.text="已关注"
+            tv_follow.isEnabled=false
+        }
+
+    }
+
+    override fun follow() {
+        showToast("关注成功")
+        tv_follow.text="已关注"
+        tv_follow.isEnabled=false
+    }
+
     override fun getGoods(liveGoods: LiveGoods) {
         tv_number.text=""+liveGoods.goods.size
         if (liveGoods.goods.size==0){
@@ -91,6 +106,12 @@ class LivePlayerActivity : BaseMvpActivity<LivePlayerPresenter>(),LivePlayerCont
 
 
             return@setOnEditorActionListener  true
+        }
+        tv_follow.setOnClickListener {
+            getPresenter().follow(Constants.getToken(),intent.getStringExtra("supplier_id"))
+        }
+        iv_service.setOnClickListener {
+            CustomerServiceAcitivity.startCustomerServiceAcitivity(this)
         }
 
     }
@@ -141,13 +162,18 @@ class LivePlayerActivity : BaseMvpActivity<LivePlayerPresenter>(),LivePlayerCont
      * 初始化数据状态
      */
     override fun initData() {
-        Log.i("activitysss",this@LivePlayerActivity.toString())
+        Log.i("supplier_id",intent.getStringExtra("supplier_id"))
         //isExit=0
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         (application as App).addActivity(this)
         hideStatusBar()
         Log.i("onErrorlive",""+Constants.getIsExit())
         Constants.putIsExit(0)
+        if (Constants.isLogin()){
+            getPresenter().isFollow(Constants.getToken(),intent.getStringExtra("supplier_id"))
+        }else{
+            tv_follow.visibility=View.GONE
+        }
         play()
     }
 
@@ -227,6 +253,7 @@ class LivePlayerActivity : BaseMvpActivity<LivePlayerPresenter>(),LivePlayerCont
         }
         if (intent.getIntExtra("isRecord",0)==2){
             et_send.visibility=View.GONE
+            iv_share.visibility=View.GONE
         }
 
         iv_close.setOnClickListener{
@@ -464,7 +491,7 @@ class LivePlayerActivity : BaseMvpActivity<LivePlayerPresenter>(),LivePlayerCont
 
     }
     companion object {
-        fun startLivePlayerActivity(context: Context,live_id:String,play_url:String,group_id:String,live_title:String,isRecord:Int,uri:String){
+        fun startLivePlayerActivity(context: Context,live_id:String,play_url:String,group_id:String,live_title:String,isRecord:Int,uri:String,supplier_id:String){
             val intent = Intent(context, LivePlayerActivity::class.java)
             intent.putExtra("live_id",live_id)
             intent.putExtra("play_url",play_url)
@@ -472,6 +499,7 @@ class LivePlayerActivity : BaseMvpActivity<LivePlayerPresenter>(),LivePlayerCont
             intent.putExtra("live_title",live_title)
             intent.putExtra("isRecord",isRecord)//标记是否为精彩回顾
             intent.putExtra("uri",uri)
+            intent.putExtra("supplier_id",supplier_id)
             context.startActivity(intent)
         }
     }

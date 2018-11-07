@@ -14,6 +14,9 @@ import io.reactivex.Observable
  * describe:
  */
 class EmeraldsDetailModel: EmeraldsDetailContract.Model {
+    override fun jifenEx(token: String, incr_id: String)=AppApi.Api().getjifenEx(token,incr_id)
+    override fun getjifenDetail(token: String, incr_id: String)=AppApi.Api().getjifenDetail(token,incr_id)
+
     override fun exchange(token: String, ct_id: String): Observable<BaseResponseEntity<Any>> =AppApi.Api().exchange(token,ct_id)
 
     override fun getEmeraldsDetail(token:String,ct_id: String): Observable<BaseResponseEntity<EmeraldsDetail>> =AppApi.Api().getEmeraldsDetail(token,ct_id)

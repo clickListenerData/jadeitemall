@@ -18,11 +18,11 @@ interface ApplicationContract {
 
     }
     interface Model{
-        fun apply(token:String,supplier_name:String,email:String,phone:String,inviter:String,license:String,attach:String): Observable<BaseResponseEntity<Any>>
+        fun apply(token:String,company_name:String,email:String,phone:String,inviter:String,license:String,attach:String,supplier_name:String,head_img:String,intro:String): Observable<BaseResponseEntity<Any>>
         fun getImage(upload_img:String):Observable<BaseResponseEntity<Image>>
     }
     abstract class Presenter:BaseMvpPresenter<Model, View>(){
-        abstract fun apply(token:String,supplier_name:String,email:String,phone:String,inviter:String,license:String,attach:String)
+        abstract fun apply(token:String,company_name:String,email:String,phone:String,inviter:String,license:String,attach:String,supplier_name:String,head_img:String,intro:String)
         abstract fun getImage(upload_img:String)
     }
 }

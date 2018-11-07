@@ -51,6 +51,7 @@ public class PersonCommonBean {
     public static List<PersonCommonBean> createList(){
         List<PersonCommonBean> data = new ArrayList<>();
         data.add(new PersonCommonBean(R.drawable.ic_collect_n, "我的收藏", LiveDetailsActivity.class));
+        data.add(new PersonCommonBean(R.drawable.icon_attention_n,"我的关注", LiveDetailsActivity.class));
         data.add(new PersonCommonBean(R.drawable.icon_footprint, "我的足迹", LiveDetailsActivity.class));
         data.add(new PersonCommonBean(R.drawable.ic_appoint_n,"我的预约", LiveDetailsActivity.class));
         data.add(new PersonCommonBean(R.drawable.ic_asset_n,"我的资产", LiveDetailsActivity.class));

@@ -3,8 +3,6 @@ package com.microple.jademall.ui.Personal.activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
-import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.text.Editable
 import android.text.TextWatcher
@@ -63,8 +61,8 @@ class IntergrationPushActivity : BaseMvpActivity<IntergrationPushPresenter>(),In
         recyclerView.isNestedScrollingEnabled = false
         adapter.setOnItemClickListener { adapter, view, position ->
             et_zhanhao.setText((adapter as IntergrationPushAdapter).data[position].phone)
-            tv_name.text=(adapter as IntergrationPushAdapter).data[position].to_user
-            iv_head.loadHeadImag((adapter as IntergrationPushAdapter).data[position].head_img)
+            tv_name.text=adapter.data[position].to_user
+            iv_head.loadHeadImag(adapter.data[position].head_img)
         }
     }
 
@@ -76,14 +74,20 @@ class IntergrationPushActivity : BaseMvpActivity<IntergrationPushPresenter>(),In
         iv_back.setOnClickListener{
             finish()
         }
+        tv_dongjie.setOnClickListener {
+            var intent=Intent(this,IgRecordActivity::class.java)
+            this.startActivityForResult(intent,2)
+        }
         tv_sure.setOnClickListener{
             if (tv_keyong.text.toString().isNullOrEmpty()&&tv_dongjie.text.toString().isNullOrEmpty()){
                 showToast("请输入转账积分")
             }else if (!tv_keyong.text.isNullOrEmpty()&&pay_points.toDouble()<tv_keyong.text.toString().toDouble()){
                             showToast("请输入积分小于可用的")
-            } else if (!tv_dongjie.text.isNullOrEmpty()&&pay_dongjie.toDouble()<tv_dongjie.text.toString().toDouble()){
-                    showToast("请输入积分小于拥有的")
-            }else{
+            }
+//            else if (!tv_dongjie.text.isNullOrEmpty()&&pay_dongjie.toDouble()<tv_dongjie.text.toString().toDouble()){
+//                    showToast("请输入积分小于拥有的")
+//            }
+            else{
                 showDialog()
 
             }
@@ -108,8 +112,6 @@ class IntergrationPushActivity : BaseMvpActivity<IntergrationPushPresenter>(),In
     var pay_points=""
     var pay_dongjie=""
     override fun getAccout(accoutInfo: AccountIinfo) {
-//        iv_head.loadImag(accoutInfo.user_info.head_img)
-//        tv_name.text=accoutInfo.user_info.user_name
         tv_keyong.hint="可用积分剩余"+accoutInfo.user_info.pay_points
         pay_points=accoutInfo.user_info.pay_points
         pay_dongjie=accoutInfo.user_info.frozen_points
@@ -151,12 +153,23 @@ class IntergrationPushActivity : BaseMvpActivity<IntergrationPushPresenter>(),In
         }
         psw_view.setOnInputFinishListener{
             showLoadingDialog()
-            getPresenter().push(Constants.getToken(),et_zhanhao.text.toString(),tv_keyong.text.toString(),tv_dongjie.text.toString(),it)
+            getPresenter().push(Constants.getToken(),et_zhanhao.text.toString(),tv_keyong.text.toString(),fp_id,it)
 
         }
         dialog = AlertDialog.Builder(mContext).create()
         dialog!!.setView(view)
         dialog!!.show()
+    }
+    var points=""
+    var fp_id=""
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode==2&&resultCode==2){
+            points=data?.getStringExtra("points")!!
+            fp_id=""+data?.getIntExtra("fp_id",0)
+            tv_dongjie.text=points
+        }
     }
 
 }

@@ -11,6 +11,7 @@ import com.flyco.dialog.listener.OnBtnClickL
 import com.flyco.dialog.widget.NormalDialog
 import com.microple.jademall.R
 import com.microple.jademall.bean.EmeraldsDetail
+import com.microple.jademall.bean.JifenDetail
 import com.microple.jademall.common.App
 import com.microple.jademall.common.Constants
 import com.microple.jademall.ui.Personal.mvp.contract.EmeraldsDetailContract
@@ -26,6 +27,18 @@ import kotlinx.android.synthetic.main.item_title.*
  * describe:翡翠订单详情
  */
 class EmeraldsDetailActivity : BaseMvpActivity<EmeraldsDetailPresenter>(),EmeraldsDetailContract.View {
+    override fun getjifenDetail(jifenDetail: JifenDetail) {
+        loading.visibility= View.GONE
+        iv_goodsImage.loadImag(jifenDetail.increment.goods.goods_img)
+        tv_goodsName.text=jifenDetail.increment.goods.goods_name
+        tv_goodsNum.text=jifenDetail.increment.goods.goods_sn
+        tv_time.text="购买时间    "+jifenDetail.increment.add_time
+        tv_number.text="订单号         "+jifenDetail.increment.order_sn
+        tv_price.text="购买价格    "+jifenDetail.increment.order_amount
+        tv_fangshi.text="购买方式    "+jifenDetail.increment.pay_type
+    }
+
+    var index=1//1代表翡翠柜详情。2代表积分柜详情
     override fun exchange() {
         showToast("兑换成功")
         dismissLoadingDialog()
@@ -50,14 +63,26 @@ class EmeraldsDetailActivity : BaseMvpActivity<EmeraldsDetailPresenter>(),Emeral
      * 初始化数据状态
      */
     override fun initData() {
-        tv_title.text="翡翠柜详情"
-        (application as App).addActivity(this)
-        var ct_id=intent.getStringExtra("ct_id")
-        getPresenter().getEmeraldsDetail(Constants.getToken(),ct_id)
-        Log.i("dddddddd","ct_id"+ct_id)
-        tv_jifen.setOnClickListener{
-            showDialog(this,ct_id)
+        index=intent.getIntExtra("index",1)
+        if (index==2){
+            tv_title.text="积分柜详情"
+            tv_tihuo.visibility=View.GONE
+            getPresenter().getjifenDetail(Constants.getToken(),intent.getStringExtra("incr_id"))
+            tv_jifen.setOnClickListener{
+                showDialog(this,intent.getStringExtra("incr_id"))
+            }
+        }else{
+            tv_title.text="翡翠柜详情"
+            tv_shouyi.visibility=View.GONE
+            var ct_id=intent.getStringExtra("ct_id")
+            getPresenter().getEmeraldsDetail(Constants.getToken(),ct_id)
+            tv_jifen.setOnClickListener{
+                showDialog(this,ct_id)
+            }
         }
+        (application as App).addActivity(this)
+
+
 
     }
 
@@ -96,10 +121,12 @@ class EmeraldsDetailActivity : BaseMvpActivity<EmeraldsDetailPresenter>(),Emeral
         (application as App).deleteActivity(this)
     }
 
-    companion object {
-        fun startOrderDetailActivity(context: Context,ct_id:String){
+    companion object {//ct_id翡翠柜ID，incr_id积分柜ID
+        fun startOrderDetailActivity(context: Context,ct_id:String,incr_id:String ,index:Int){
             val intent = Intent(context,EmeraldsDetailActivity::class.java)
             intent.putExtra("ct_id",ct_id)
+            intent.putExtra("index",index)
+        intent.putExtra("incr_id",incr_id)
             context.startActivity(intent)
         }
     }
@@ -124,7 +151,10 @@ class EmeraldsDetailActivity : BaseMvpActivity<EmeraldsDetailPresenter>(),Emeral
             dialog.dismiss()
         }, OnBtnClickL {
             showLoadingDialog()
+            if (index==1)
             getPresenter().exchange(Constants.getToken(),ct_id)
+            else
+                getPresenter().jifenEx(Constants.getToken(),ct_id)
             dialog.dismiss()
         })
     }

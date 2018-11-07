@@ -11,22 +11,27 @@ import com.microple.jademall.bean.Ask;
 import com.microple.jademall.bean.AskDetail;
 import com.microple.jademall.bean.AskType;
 import com.microple.jademall.bean.Assert;
+import com.microple.jademall.bean.Attention;
 import com.microple.jademall.bean.Category;
 import com.microple.jademall.bean.Collection;
 import com.microple.jademall.bean.CustiomerDetail;
 import com.microple.jademall.bean.Customer;
+import com.microple.jademall.bean.Daifu;
 import com.microple.jademall.bean.DetailShare;
 import com.microple.jademall.bean.Emeralds;
 import com.microple.jademall.bean.EmeraldsDetail;
 import com.microple.jademall.bean.FirstImage;
+import com.microple.jademall.bean.Follow;
 import com.microple.jademall.bean.Goods;
 import com.microple.jademall.bean.GoodsDetail;
 import com.microple.jademall.bean.HandImage;
+import com.microple.jademall.bean.IgRecord;
 import com.microple.jademall.bean.ImOrder;
 import com.microple.jademall.bean.Image;
 import com.microple.jademall.bean.ImageDetail;
 import com.microple.jademall.bean.IntergrationDetail;
 import com.microple.jademall.bean.IsSettingPayPW;
+import com.microple.jademall.bean.JifenDetail;
 import com.microple.jademall.bean.Label;
 import com.microple.jademall.bean.LiveDetail;
 import com.microple.jademall.bean.LiveGoods;
@@ -267,7 +272,7 @@ public interface AppService {
      */
     @FormUrlEncoded
     @POST("user_center/transfer_account")
-    Observable<BaseResponseEntity<Object>> push(@Header("token") String token, @Field("to_user")String to_user,@Field("points")String points,@Field("frozen_points")String frozen_points,@Field("trade_password")String trade_password);
+    Observable<BaseResponseEntity<Object>> push(@Header("token") String token, @Field("to_user")String to_user,@Field("points")String points,@Field("fp_id")String fp_id,@Field("trade_password")String trade_password);
     /**
      * 修改头像
      */
@@ -323,7 +328,7 @@ public interface AppService {
      */
     @FormUrlEncoded
     @POST("user_center/enter_apply")
-    Observable<BaseResponseEntity<Object>> apply(@Header("token") String token, @Field("supplier_name") String supplier_name,@Field("email")String email,@Field("phone")String phone,@Field("inviter")String inviter,@Field("license") String license,@Field("attach")String attach);
+    Observable<BaseResponseEntity<Object>> apply(@Header("token") String token, @Field("company_name") String company_name,@Field("email")String email,@Field("phone")String phone,@Field("inviter")String inviter,@Field("license") String license,@Field("attach")String attach,@Field("supplier_name")String supplier_name,@Field("head_img")String head_img,@Field("intro") String intro);
     /**
      * 意见反馈
      */
@@ -447,7 +452,7 @@ public interface AppService {
      */
     @FormUrlEncoded
     @POST("pay/pay")
-    Observable<BaseResponseEntity<Pay>> pay(@Header("token") String token, @Field("send") String send, @Field("live")String live,@Field("cabinet")String cabinet,@Field("address_id")String address_id,@Field("pay_type") String pay_type,@Field("trade_password")String trade_password,@Field("sb_id")String sb_id,@Field("pick_type")String pick_type,@Field("ct_id")String ct_id);
+    Observable<BaseResponseEntity<Pay>> pay(@Header("token") String token, @Field("send") String send, @Field("live")String live,@Field("cabinet")String cabinet,@Field("address_id")String address_id,@Field("pay_type") String pay_type,@Field("trade_password")String trade_password,@Field("sb_id")String sb_id,@Field("incr_type1")String incr_type1,@Field("incr_type2")String incr_type2 ,@Field("incr_type3")String incr_type3,@Field("freight_pay") String freight_pay);
     /**
      * 商品详情分享
      */
@@ -496,6 +501,18 @@ public interface AppService {
     @POST("user_center/share")
     Observable<BaseResponseEntity<Share>> myShare(@Header("token") String token);
     /**
+     * 关注商家
+     */
+    @FormUrlEncoded
+    @POST("user_center/follow_supplier")
+    Observable<BaseResponseEntity<Object>> follow(@Header("token") String token ,@Field("supplier_id")String supplier_id);
+    /**
+     * 判断是否已关注
+     */
+    @FormUrlEncoded
+    @POST("live/check_follow")
+    Observable<BaseResponseEntity<Follow>> isFollow(@Header("token") String token , @Field("supplier_id")String supplier_id);
+    /**
      * 我的预约
      */
     @POST("user_center/appointment")
@@ -534,7 +551,7 @@ public interface AppService {
      */
     @FormUrlEncoded
     @POST("order/order_info")
-    Observable<BaseResponseEntity<OrderInfo>> getOrderInfo(@Header("token") String token,@Field("send")String send,@Field("live") String live,@Field("cabinet")String cabinet);
+    Observable<BaseResponseEntity<OrderInfo>> getOrderInfo(@Header("token") String token,@Field("send")String send,@Field("live") String live,@Field("cabinet")String cabinet,@Field("incr_type1")String incr_type1,@Field("incr_type2")String incr_type2,@Field("incr_type3")String incr_type3,@Field("freight_pay")String freight_pay);
     /**
      * 浏览足迹
      */
@@ -546,8 +563,61 @@ public interface AppService {
      */
     @POST("user_center/foot_print")
     Observable<BaseResponseEntity<Collection>> getZujiList(@Header("token") String token);
+    /**
+     * 提货支付
+     */
+    @FormUrlEncoded
+    @POST("pick_pay/pick_pay")
+    Observable<BaseResponseEntity<Pay>> getPick(@Header("token") String token,@Field("pay_type")String pay_type,@Field("address_id")String address_id,@Field("cabinet_id")String cabinet_id,@Field("shipping_pay")String shipping_pay);
+    /**
+     * 冻积分记录
+     */
+    @POST("user_center/frozen_points_info")
+    Observable<BaseResponseEntity<IgRecord>> igRecord(@Header("token") String token);
+    /**
+     * 关注列表
+     */
+    @POST("user_center/follow_list")
+    Observable<BaseResponseEntity<Attention>> getAttention(@Header("token") String token);
+    /**
+     * 他人代付
+     */
+    @FormUrlEncoded
+    @POST("other_pay/other_pay")
+    Observable<BaseResponseEntity<Object>> daifu(@Header("token") String token,@Field("sb_id")String sb_id, @Field("send") String send, @Field("freight_pay")String freight_pay,@Field("live")String live,@Field("cabinet")String cabinet,@Field("incr_type1")String incr_type1,@Field("incr_type2")String incr_type2 ,@Field("incr_type3")String incr_type3,@Field("address_id")String address_id,@Field("phone") String phone,@Field("pay_msg")String pay_msg);
+    /**
+     * 代付支付
+     */
+    @FormUrlEncoded
+    @POST("pay/pay")
+    Observable<BaseResponseEntity<Pay>> otherPay(@Header("token") String token,@Field("pay_type") String pay_type,@Field("sb_id")String sb_id, @Field("send") String send, @Field("live")String live,@Field("cabinet")String cabinet,@Field("freight_pay") String freight_pay,@Field("incr_type1")String incr_type1,@Field("incr_type2")String incr_type2 ,@Field("incr_type3")String incr_type3,@Field("address_id")String address_id,@Field("userId")String userId,@Field("trade_password")String trade_password);
+    /**
+     * 历史代付
+     */
+    @POST("other_pay/history_pay")
+    Observable<BaseResponseEntity<Daifu>> getHistory(@Header("token") String token);
+    /**
+     * 积分柜
+     */
+    @POST("user_center/increment")
+    Observable<BaseResponseEntity<Emeralds>> getjifen(@Header("token") String token);
+    /**
+     * 积分柜详情
+     */
+    @FormUrlEncoded
+    @POST("user_center/increment_detail")
+    Observable<BaseResponseEntity<JifenDetail>> getjifenDetail(@Header("token") String token, @Field("incr_id")String incr_id);
+
+    /**
+     * 积分兑换（积分柜）
+     */
+    @FormUrlEncoded
+    @POST("user_center/exchange_points")
+    Observable<BaseResponseEntity<Object>> getjifenEx(@Header("token") String token,@Field("incr_id")String incr_id);
+
 
 }
+
 
 
 

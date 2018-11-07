@@ -20,8 +20,8 @@ class ApplicationPresenter:ApplicationContract.Presenter() {
         })
     }
 
-    override fun apply(token: String, supplier_name: String, email: String, phone: String, inviter: String, license: String, attach: String) {
-        if (supplier_name.isNullOrEmpty()){
+    override fun apply(token: String, company_name: String, email: String, phone: String, inviter: String, license: String, attach: String, supplier_name: String, head_img: String, intro: String) {
+        if (company_name.isNullOrEmpty()){
             getView()?.showToast("请输入公司名称")
             getView()?.dismissLoadingDialog()
             return
@@ -29,8 +29,8 @@ class ApplicationPresenter:ApplicationContract.Presenter() {
             getView()?.showToast("请输入联系方式")
             getView()?.dismissLoadingDialog()
             return
-        }else if (!inviter.isNullOrEmpty()&&!inviter.isPhone()){
-            getView()?.showToast("请输入正确的邀请人")
+        }else if (supplier_name.isNullOrEmpty()){
+            getView()?.showToast("请输入商家名称")
             getView()?.dismissLoadingDialog()
             return
         }else if (license.isNullOrEmpty()){
@@ -42,7 +42,7 @@ class ApplicationPresenter:ApplicationContract.Presenter() {
             getView()?.dismissLoadingDialog()
             return
         }
-        getModel().apply(token,supplier_name,email,phone,inviter,license,attach).ui({
+        getModel().apply(token,company_name,email,phone,inviter,license,attach,supplier_name,head_img,intro).ui({
             getView()?.apply(it.msg!!)
         },{
             getView()?.dismissLoadingDialog()

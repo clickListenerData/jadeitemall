@@ -13,6 +13,7 @@ import com.microple.jademall.bean.Pick
 import com.microple.jademall.common.App
 import com.microple.jademall.common.Constants
 import com.microple.jademall.dialog.PayDialog
+import com.microple.jademall.dialog.YunFeiDialog
 import com.microple.jademall.ui.Personal.mvp.contract.PickGoodsContract
 import com.microple.jademall.ui.Personal.mvp.presenter.PickGoodsPresenter
 import com.microple.jademall.ui.home.activity.PaySucceefulActivity
@@ -30,6 +31,7 @@ import kotlinx.android.synthetic.main.item_title.*
  * describe:提货中心
  */
 class PickGoodsActivity : BaseMvpActivity<PickGoodsPresenter>(),PickGoodsContract.View {
+    var shipping_pay=2//1、到付，2、现付
     override fun pay(pay: Pay) {
         if (index==1||index==2){
             Log.i("singgg",pay.data.sign)
@@ -47,10 +49,6 @@ class PickGoodsActivity : BaseMvpActivity<PickGoodsPresenter>(),PickGoodsContrac
                         }
                     })
 
-        }else if (index==3){
-            showToast("支付成功")
-            PaySucceefulActivity.startPaySucceefulActivity(mContext,pay.data.order_sn,1)
-            finish()
         }
 
     }
@@ -92,32 +90,50 @@ class PickGoodsActivity : BaseMvpActivity<PickGoodsPresenter>(),PickGoodsContrac
             intent.putExtra("flag",1)
             this.startActivityForResult(intent,3)
         }
+//        tv_type_yunfei.setOnClickListener {
+//            if (shipping_pay==2){
+//                shipping_pay=1
+//                tv_type_yunfei.text="运费到付"
+//            }else{
+//                shipping_pay=2
+//                tv_type_yunfei.text="运费现付"
+//            }
+//        }
         tv_pay.setOnClickListener{
+            if (pick?.cut_status==0){
+                showToast("未切石，不能提货")
+                return@setOnClickListener
+            }
             if (pick?.user_address?.ua_id==null){
                 showToast("请添加地址")
             }else {
+                var yunFeiDialog=YunFeiDialog(this)
+                yunFeiDialog.show()
+                yunFeiDialog.setOnBtnClickListener {
+                    shipping_pay=it
+                    yunFeiDialog.dismiss()
+                    var dialog=PayDialog(this)
+                    dialog.show()
+                    dialog.setVis()
+                    dialog.setOnBtnClickListener {
+                        when(it){
+                            1->{
+                                showLoadingDialog()
+                                index=1
+                                getPresenter().pay(Constants.getToken(),"1",pick?.user_address?.ua_id!!,intent.getStringExtra("ct_id"),"${shipping_pay}")
+                            }
+                            2->{
+                                showLoadingDialog()
+                                index=2
+                                getPresenter().pay(Constants.getToken(),"2",pick?.user_address?.ua_id!!,intent.getStringExtra("ct_id"),"${shipping_pay}")
 
-            var dialog=PayDialog(this)
-            dialog.show()
-            dialog.setVis()
-            dialog.setOnBtnClickListener {
-                when(it){
-                    1->{
-                        showLoadingDialog()
-                        index=1
-                        getPresenter().pay(Constants.getToken(),"","","",pick?.user_address?.ua_id!!,"1","","","1",intent.getStringExtra("ct_id"))
+                            }
+                        }
                     }
-                    2->{
-                        showLoadingDialog()
-                        index=2
-                        getPresenter().pay(Constants.getToken(),"","","",pick?.user_address?.ua_id!!,"2","","","1",intent.getStringExtra("ct_id"))
-                    }
-//                    3->{
-//                        index=3
-//                        showDialog()
-//                    }
+
                 }
-            }
+
+
             }
 
         }
@@ -126,27 +142,6 @@ class PickGoodsActivity : BaseMvpActivity<PickGoodsPresenter>(),PickGoodsContrac
     var index=0
     var dialog:AlertDialog?=null
     var password:String?=null
-    fun showDialog() {
-        var view = View.inflate(mContext, R.layout.view_input_pay_psw_dialog, null)
-
-        var psw_view=view.findViewById<PwdEditText>(R.id.psw_view)
-        var bt_quxiao=view.findViewById<TextView>(R.id.bt_quxiao)
-        var tv_price=view.findViewById<TextView>(R.id.tv_price)
-        tv_price.text=pick?.service_fee
-        bt_quxiao.setOnClickListener{
-            dialog!!.dismiss()
-        }
-        psw_view.setOnInputFinishListener{
-            password=it
-            showDialog()
-            dialog!!.dismiss()
-            getPresenter().pay(Constants.getToken(),"","","",pick?.user_address?.ua_id!!,"3",password!!.md5Salt(),"","1",intent.getStringExtra("ct_id"))
-
-        }
-        dialog = AlertDialog.Builder(mContext).create()
-        dialog!!.setView(view)
-        dialog!!.show()
-    }
 
     override fun onDestroy() {
         super.onDestroy()
@@ -167,7 +162,8 @@ class PickGoodsActivity : BaseMvpActivity<PickGoodsPresenter>(),PickGoodsContrac
         tv_number.text=pick.goods_sn
         tv_stye.text=pick.type
         tv_beizhu.text=pick.remark
-        tv_fuwufei.text="￥"+pick.service_fee
+        tv_fuwufei.text="￥${pick.service_fee}元"
+        tv_yunfei.text="￥${pick.freight_price}元"
     }
     var name=""
     var phone=""

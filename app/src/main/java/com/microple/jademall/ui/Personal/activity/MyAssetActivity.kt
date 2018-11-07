@@ -2,7 +2,6 @@ package com.microple.jademall.ui.Personal.activity
 
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
 import android.view.View
 import com.microple.jademall.R
 import com.microple.jademall.bean.Assert
@@ -52,7 +51,10 @@ class MyAssetActivity : BaseMvpActivity<MyAssetPresenter>(),MyAssetContract.View
             IntergrationPushActivity.startIntergrationPushActivity(this)
         }
         tv_feicui.setOnClickListener{
-            EmeraldsActivity.startEmeraldsActivity(this)
+            EmeraldsActivity.startEmeraldsActivity(this,1)
+        }
+        tv_jifen.setOnClickListener {
+            EmeraldsActivity.startEmeraldsActivity(this,2)
         }
         iv_back.setOnClickListener{
             finish()

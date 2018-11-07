@@ -1,14 +1,9 @@
 package com.microple.jademall.ui.Personal.activity
 
-import android.Manifest
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
-import android.os.PersistableBundle
-import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import com.blankj.utilcode.util.EncodeUtils
@@ -34,6 +29,7 @@ class ApplicationActivity : BaseMvpActivity<ApplicationPresenter>(),ApplicationC
 
     var license=""//营业执照
     var attach=""//附件
+    var simage=""//商家头像
     var index=0
     var flag=0
     /**
@@ -72,6 +68,12 @@ class ApplicationActivity : BaseMvpActivity<ApplicationPresenter>(),ApplicationC
             }else if (et_phone.text.isNullOrEmpty()){
                 showToast("请输入联系方式")
                 dismissLoadingDialog()
+            }else if (et_sname.text.isNullOrEmpty()){
+                showToast("请输入商家名称")
+                dismissLoadingDialog()
+            }else if (simage.isNullOrEmpty()){
+                showToast("请添加商家头像")
+                dismissLoadingDialog()
             }else if (license.isNullOrEmpty()){
                 showToast("请添加营业执照")
                 dismissLoadingDialog()
@@ -92,6 +94,10 @@ class ApplicationActivity : BaseMvpActivity<ApplicationPresenter>(),ApplicationC
             index=2
             showEditAvatarDialog()
         }
+        rl_sImage.setOnClickListener {
+            index=3
+            showEditAvatarDialog()
+        }
     }
 
     override fun apply(msg: String) {
@@ -104,12 +110,16 @@ class ApplicationActivity : BaseMvpActivity<ApplicationPresenter>(),ApplicationC
             flag++
             license=image.image_data
             getPresenter().getImage(attach)
-        }else{
+        }else if (flag==1){
+            flag++
             attach=image.image_data
+            getPresenter().getImage(simage)
+        }else{
             Log.i("licensess",license)
             Log.i("attachsss",attach)
+            simage=image.image_data
             getPresenter().apply(Constants.getToken(),et_gongsi.text.toString(),et_email.text.toString(),
-                    et_phone.text.toString(),et_invite.text.toString(),license,attach)
+                    et_phone.text.toString(),et_invite.text.toString(),license,attach,et_sname.text.toString(),simage,tv_content.text.toString())
 
         }
 
@@ -129,10 +139,14 @@ class ApplicationActivity : BaseMvpActivity<ApplicationPresenter>(),ApplicationC
                 license= EncodeUtils.base64Encode2String(File(it.compressPath).readBytes())
                 iv_yingye.setImageURI(Uri.fromFile(File(it.compressPath)))
                 iv_add_yingye.visibility=View.GONE
-            }else{
+            }else if (index==2){
                 attach=EncodeUtils.base64Encode2String(File(it.compressPath).readBytes())
                 iv_fujian.setImageURI(Uri.fromFile(File(it.compressPath)))
                 iv_add_fujian.visibility=View.GONE
+            }else{
+                simage=EncodeUtils.base64Encode2String(File(it.compressPath).readBytes())
+                iv_add_sImage.visibility=View.GONE
+                iv_sImage.setImageURI(Uri.fromFile(File(it.compressPath)))
             }
 
         })

@@ -170,21 +170,24 @@ class PersonlFragment : BaseMvpFragment<PersonalContract.Model,PersonalContract.
                     MyCollectionActivity.startMyCollectionActivity(context!!,1)
                 }
                 1->{
-                    MyCollectionActivity.startMyCollectionActivity(context!!,2)
+                    MyAttentionActivity.startMyAttentionActivity(context!!)
                 }
                 2->{
-                    MyAppointmentActivity.startMyAppointmentActivity(context!!)
+                    MyCollectionActivity.startMyCollectionActivity(context!!,2)
                 }
                 3->{
-                    MyAssetActivity.startMyAssetActivity(context!!)
+                    MyAppointmentActivity.startMyAppointmentActivity(context!!)
                 }
                 4->{
-                    ShareActivity.startShareActivityMerchantEntryActivity(context!!)
+                    MyAssetActivity.startMyAssetActivity(context!!)
                 }
                 5->{
-                    MyTeamActivity.startMyTeamActivity(context!!)
+                    ShareActivity.startShareActivityMerchantEntryActivity(context!!)
                 }
                 6->{
+                    MyTeamActivity.startMyTeamActivity(context!!)
+                }
+                7->{
                     MerchantEntryActivity.startMerchantEntryActivity(context!!)
                 }
             }
