@@ -17,13 +17,13 @@ public class Login {
     private String head_img;
     private String im_identifier;
     private String im_user_sig;
-    private String is_phone;
+    private int is_phone;
 
-    public String getIs_phone() {
+    public int getIs_phone() {
         return is_phone;
     }
 
-    public void setIs_phone(String is_phone) {
+    public void setIs_phone(int is_phone) {
         this.is_phone = is_phone;
     }
 

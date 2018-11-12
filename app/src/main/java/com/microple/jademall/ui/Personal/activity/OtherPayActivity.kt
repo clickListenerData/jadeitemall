@@ -10,6 +10,7 @@ import com.google.gson.Gson
 import com.microple.jademall.R
 import com.microple.jademall.bean.MyMessage
 import com.microple.jademall.bean.Pay
+import com.microple.jademall.bean.PayTyle
 import com.microple.jademall.common.Constants
 import com.microple.jademall.dialog.PayDialog
 import com.microple.jademall.ui.Personal.mvp.contract.OtherPayContract
@@ -26,6 +27,48 @@ import kotlinx.android.synthetic.main.activity_other_pay.*
 import kotlinx.android.synthetic.main.item_title.*
 
 class OtherPayActivity : BaseMvpActivity<OtherPayPresenter>(),OtherPayContract.View {
+    override fun getPayTyle(payTyle: PayTyle) {
+        var dialog= PayDialog(this)
+        for (i in 1..4){
+            if(!payTyle.pay_type.contains("${i}")){
+                dialog.setGone(i)
+            }
+        }
+        dialog.setDaifuVis()
+        dialog.show()
+        dialog.setOnBtnClickListener(object : PayDialog.OnBtnClickListener {
+            override fun cancel(index: Int) {
+                dialog.dismiss()
+
+                when (index) {
+                    1 -> {//微信支付
+                        indexs = 1
+                        showLoadingDialog()
+                        dialog.dismiss()
+                        getPresenter().otherPay(Constants.getToken(),"1",content.sb_id,content.send,content.live,content.cabinet,content.freight_pay,content.incr_type1,content.incr_type2,content.incr_type3,content.address_id,intent.getStringExtra("user_id"),"")
+                    }
+                    2 -> {//支付宝支付
+
+                        indexs = 2
+                        showLoadingDialog()
+                        dialog.dismiss()
+                        getPresenter().otherPay(Constants.getToken(),"2",content.sb_id,content.send,content.live,content.cabinet,content.freight_pay,content.incr_type1,content.incr_type2,content.incr_type3,content.address_id,intent.getStringExtra("user_id"),"")
+
+                    }
+                    3 -> {
+                        indexs = 3
+                        dialog.dismiss()
+                        showDialogs("" + content.total_fee)
+
+
+                    }
+
+                }
+            }
+
+        })
+    }
+
     override fun otherPay(pay: Pay) {
         dismissLoadingDialog()
         if (indexs==1||indexs==2){
@@ -86,41 +129,8 @@ class OtherPayActivity : BaseMvpActivity<OtherPayPresenter>(),OtherPayContract.V
             finish()
         }
         tv_pay.setOnClickListener {
+            getPresenter().getPayTyle(Constants.getToken(),"1")
 
-            var dialog= PayDialog(this)
-            dialog.setDaifuVis()
-                dialog.show()
-                dialog.setOnBtnClickListener(object : PayDialog.OnBtnClickListener {
-                    override fun cancel(index: Int) {
-                        dialog.dismiss()
-
-                        when (index) {
-                            1 -> {//微信支付
-                                indexs = 1
-                                showLoadingDialog()
-                                dialog.dismiss()
-                                getPresenter().otherPay(Constants.getToken(),"1",content.sb_id,content.send,content.live,content.cabinet,content.freight_pay,content.incr_type1,content.incr_type2,content.incr_type3,content.address_id,intent.getStringExtra("user_id"),"")
-                            }
-                            2 -> {//支付宝支付
-
-                                indexs = 2
-                                showLoadingDialog()
-                                dialog.dismiss()
-                                getPresenter().otherPay(Constants.getToken(),"2",content.sb_id,content.send,content.live,content.cabinet,content.freight_pay,content.incr_type1,content.incr_type2,content.incr_type3,content.address_id,intent.getStringExtra("user_id"),"")
-
-                            }
-                            3 -> {
-                                indexs = 3
-                                dialog.dismiss()
-                                showDialogs("" + content.total_fee)
-
-
-                            }
-
-                        }
-                    }
-
-                })
 
             }
 

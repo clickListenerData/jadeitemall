@@ -21,6 +21,8 @@ class LoginPresenter:LoginContract.Presenter() {
             },{
                 if ((it is ApiFaileException)){
                         getView()?.threeFaid()
+                }else{
+                    getView()?.showToast(it)
                 }
             })
     }

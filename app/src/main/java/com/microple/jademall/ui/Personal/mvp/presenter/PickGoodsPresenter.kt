@@ -11,6 +11,14 @@ import com.weibiaogan.litong.extensions.ui
  * describe:
  */
 class PickGoodsPresenter:PickGoodsContract.Presenter() {
+    override fun getPayTyle(token: String, type: String) {
+        getModel().getPayTyle(token,type).ui({
+            getView()?.getPayTyle(it.data!!)
+        },{
+            getView()?.showToast(it)
+        })
+    }
+
     override fun pay(token: String, pay_type: String, address_id: String, cabinet_id: String, shipping_pay: String) {
         getModel().pay(token,pay_type,address_id,cabinet_id,shipping_pay).ui({
             getView()?.pay(it.data!!)

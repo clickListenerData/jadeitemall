@@ -17,9 +17,9 @@ interface IntergrationGetContract {
 
     }
     interface Model{
-        fun getProfit(token:String,ct_id:String,goods_id:String): Observable<BaseResponseEntity<Profit>>
+        fun getProfit(token:String,incr_id:String,goods_id:String): Observable<BaseResponseEntity<Profit>>
     }
     abstract class Presenter:BaseMvpPresenter<Model, View>(){
-        abstract fun getProfit(token:String,ct_id:String,goods_id:String)
+        abstract fun getProfit(token:String,incr_id:String,goods_id:String)
     }
 }

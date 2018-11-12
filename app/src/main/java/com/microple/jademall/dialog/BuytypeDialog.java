@@ -10,8 +10,6 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-
 import com.microple.jademall.R;
 
 
@@ -48,9 +46,9 @@ public class BuytypeDialog extends Dialog implements View.OnClickListener {
 
         initView();
     }
-
+    View view;
     private void initView() {
-        View view = View.inflate(mContext, R.layout.view_buy_type, null);
+         view = View.inflate(mContext, R.layout.view_buy_type, null);
         view.findViewById(R.id.ll_youji).setOnClickListener(this);
         view.findViewById(R.id.ll_feicui).setOnClickListener(this);
         view.findViewById(R.id.ll_zhibo).setOnClickListener(this);
@@ -67,22 +65,26 @@ public class BuytypeDialog extends Dialog implements View.OnClickListener {
         ll_five.setOnClickListener(this);
         setContentView(view);
     }
-    public void setvisb(int tyle){
-        if (tyle==2){
-            ll_zhibo.setVisibility(View.VISIBLE);
-            ll_one.setVisibility(View.VISIBLE);
-            ll_two.setVisibility(View.VISIBLE);
-            ll_five.setVisibility(View.GONE);
-            ll_feicui.setVisibility(View.VISIBLE);
-        } else{
-            ll_zhibo.setVisibility(View.GONE);
-            ll_one.setVisibility(View.GONE);
-            ll_two.setVisibility(View.GONE);
-            ll_five.setVisibility(View.VISIBLE);
-            ll_feicui.setVisibility(View.GONE);
-        }
-
+    public void setGone(int index){
+        LinearLayout ll=view.findViewById(R.id.ll_buy);
+                ll.getChildAt(index).setVisibility(View.GONE);
     }
+//    public void setvisb(int tyle){
+//        if (tyle==2){
+//            ll_zhibo.setVisibility(View.VISIBLE);
+//            ll_one.setVisibility(View.VISIBLE);
+//            ll_two.setVisibility(View.VISIBLE);
+//            ll_five.setVisibility(View.GONE);
+//            ll_feicui.setVisibility(View.VISIBLE);
+//        } else{
+//            ll_zhibo.setVisibility(View.GONE);
+//            ll_one.setVisibility(View.GONE);
+//            ll_two.setVisibility(View.GONE);
+//            ll_five.setVisibility(View.VISIBLE);
+//            ll_feicui.setVisibility(View.GONE);
+//        }
+//
+//    }
 
 
 

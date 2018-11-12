@@ -11,8 +11,8 @@ import com.weibiaogan.litong.extensions.ui
  * describe:
  */
 class IntergrationGetPresenter:IntergrationGetContract.Presenter() {
-    override fun getProfit(token: String, ct_id: String, goods_id: String) {
-        getModel().getProfit(token,ct_id,goods_id).ui({
+    override fun getProfit(token: String, incr_id: String, goods_id: String) {
+        getModel().getProfit(token,incr_id,goods_id).ui({
                 getView()?.getProfit(it.data!!)
         },{
                 getView()?.showToast(it)

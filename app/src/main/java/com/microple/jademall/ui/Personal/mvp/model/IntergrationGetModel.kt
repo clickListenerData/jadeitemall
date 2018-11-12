@@ -14,5 +14,5 @@ import io.reactivex.Observable
  * describe:
  */
 class IntergrationGetModel: IntergrationGetContract.Model {
-    override fun getProfit(token: String, ct_id: String, goods_id: String): Observable<BaseResponseEntity<Profit>> =AppApi.Api().profit(token, ct_id, goods_id)
+    override fun getProfit(token: String, incr_id: String, goods_id: String): Observable<BaseResponseEntity<Profit>> =AppApi.Api().profit(token, incr_id, goods_id)
 }

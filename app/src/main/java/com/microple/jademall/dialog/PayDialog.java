@@ -3,6 +3,7 @@ package com.microple.jademall.dialog;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.view.Gravity;
 import android.view.View;
@@ -53,6 +54,11 @@ public class PayDialog extends Dialog implements View.OnClickListener {
         view.findViewById(R.id.ll_wx).setOnClickListener(this);
         view.findViewById(R.id.ll_daifu).setOnClickListener(this);
         setContentView(view);
+    }
+    public void setGone(int index){
+       LinearLayout ll= view.findViewById(R.id.ll_tyle);
+        ll.getChildAt(index-1).setVisibility(View.GONE);
+
     }
     public void setVis(){
         view.findViewById(R.id.ll_jifen).setVisibility(View.GONE);

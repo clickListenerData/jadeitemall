@@ -5,10 +5,10 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.view.View
-import android.widget.TextView
 import com.google.gson.Gson
 import com.microple.jademall.R
 import com.microple.jademall.bean.Pay
+import com.microple.jademall.bean.PayTyle
 import com.microple.jademall.bean.Pick
 import com.microple.jademall.common.App
 import com.microple.jademall.common.Constants
@@ -17,8 +17,6 @@ import com.microple.jademall.dialog.YunFeiDialog
 import com.microple.jademall.ui.Personal.mvp.contract.PickGoodsContract
 import com.microple.jademall.ui.Personal.mvp.presenter.PickGoodsPresenter
 import com.microple.jademall.ui.home.activity.PaySucceefulActivity
-import com.microple.jademall.weight.PwdEditText
-import com.weibiaogan.bangbang.common.md5Salt
 import com.xx.anypay.XxAnyPay
 import com.xx.anypay.XxAnyPayResultCallBack
 import com.xx.baseuilibrary.mvp.BaseMvpActivity
@@ -31,6 +29,32 @@ import kotlinx.android.synthetic.main.item_title.*
  * describe:提货中心
  */
 class PickGoodsActivity : BaseMvpActivity<PickGoodsPresenter>(),PickGoodsContract.View {
+    override fun getPayTyle(payTyle: PayTyle) {
+        var dialog=PayDialog(this)
+        for (i in 1..4){
+            if(!payTyle.pay_type.contains("${i}")){
+                dialog.setGone(i)
+            }
+        }
+
+        dialog.show()
+        dialog.setOnBtnClickListener {
+            when(it){
+                1->{
+                    showLoadingDialog()
+                    index=1
+                    getPresenter().pay(Constants.getToken(),"1",pick?.user_address?.ua_id!!,intent.getStringExtra("ct_id"),"${shipping_pay}")
+                }
+                2->{
+                    showLoadingDialog()
+                    index=2
+                    getPresenter().pay(Constants.getToken(),"2",pick?.user_address?.ua_id!!,intent.getStringExtra("ct_id"),"${shipping_pay}")
+
+                }
+            }
+        }
+    }
+
     var shipping_pay=2//1、到付，2、现付
     override fun pay(pay: Pay) {
         if (index==1||index==2){
@@ -90,15 +114,6 @@ class PickGoodsActivity : BaseMvpActivity<PickGoodsPresenter>(),PickGoodsContrac
             intent.putExtra("flag",1)
             this.startActivityForResult(intent,3)
         }
-//        tv_type_yunfei.setOnClickListener {
-//            if (shipping_pay==2){
-//                shipping_pay=1
-//                tv_type_yunfei.text="运费到付"
-//            }else{
-//                shipping_pay=2
-//                tv_type_yunfei.text="运费现付"
-//            }
-//        }
         tv_pay.setOnClickListener{
             if (pick?.cut_status==0){
                 showToast("未切石，不能提货")
@@ -111,25 +126,9 @@ class PickGoodsActivity : BaseMvpActivity<PickGoodsPresenter>(),PickGoodsContrac
                 yunFeiDialog.show()
                 yunFeiDialog.setOnBtnClickListener {
                     shipping_pay=it
+                    getPresenter().getPayTyle(Constants.getToken(),"1")
                     yunFeiDialog.dismiss()
-                    var dialog=PayDialog(this)
-                    dialog.show()
-                    dialog.setVis()
-                    dialog.setOnBtnClickListener {
-                        when(it){
-                            1->{
-                                showLoadingDialog()
-                                index=1
-                                getPresenter().pay(Constants.getToken(),"1",pick?.user_address?.ua_id!!,intent.getStringExtra("ct_id"),"${shipping_pay}")
-                            }
-                            2->{
-                                showLoadingDialog()
-                                index=2
-                                getPresenter().pay(Constants.getToken(),"2",pick?.user_address?.ua_id!!,intent.getStringExtra("ct_id"),"${shipping_pay}")
 
-                            }
-                        }
-                    }
 
                 }
 

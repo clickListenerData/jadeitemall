@@ -2,10 +2,6 @@ package com.microple.jademall.ui.Personal.activity
 
 import android.content.Context
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
-import android.os.Bundle
-import android.provider.SyncStateContract
-import android.util.Log
 import android.view.View
 import com.flyco.dialog.listener.OnBtnClickL
 import com.flyco.dialog.widget.NormalDialog
@@ -91,7 +87,7 @@ class EmeraldsDetailActivity : BaseMvpActivity<EmeraldsDetailPresenter>(),Emeral
      */
     override fun initEvent() {
         tv_shouyi.setOnClickListener{
-            IntergrationGetActivity.startEmeraldsDetailActivity(this,intent.getStringExtra("ct_id"),""+emeraldsDetail?.cabinet?.goods_id)
+            IntergrationGetActivity.startEmeraldsDetailActivity(this,intent.getStringExtra("incr_id"),""+emeraldsDetail?.cabinet?.goods_id)
         }
         tv_tihuo.setOnClickListener{
             PickGoodsActivity.startPickGoodsActivity(this,intent.getStringExtra("ct_id"))

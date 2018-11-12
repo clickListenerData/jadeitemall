@@ -12,6 +12,7 @@ import com.microple.jademall.bean.AskDetail;
 import com.microple.jademall.bean.AskType;
 import com.microple.jademall.bean.Assert;
 import com.microple.jademall.bean.Attention;
+import com.microple.jademall.bean.BuyTyle;
 import com.microple.jademall.bean.Category;
 import com.microple.jademall.bean.Collection;
 import com.microple.jademall.bean.CustiomerDetail;
@@ -48,6 +49,7 @@ import com.microple.jademall.bean.Order;
 import com.microple.jademall.bean.OrderDetail;
 import com.microple.jademall.bean.OrderInfo;
 import com.microple.jademall.bean.Pay;
+import com.microple.jademall.bean.PayTyle;
 import com.microple.jademall.bean.PersonInfo;
 import com.microple.jademall.bean.Pick;
 import com.microple.jademall.bean.PointDetail;
@@ -432,7 +434,7 @@ public interface AppService {
      */
     @FormUrlEncoded
     @POST("user_center/profit")
-    Observable<BaseResponseEntity<Profit>> profit(@Header("token") String token, @Field("ct_id") String ct_id, @Field("goods_id") String goods_id);
+    Observable<BaseResponseEntity<Profit>> profit(@Header("token") String token, @Field("incr_id") String incr_id, @Field("goods_id") String goods_id);
 
     /**
      * 提货
@@ -616,6 +618,18 @@ public interface AppService {
     Observable<BaseResponseEntity<Object>> getjifenEx(@Header("token") String token,@Field("incr_id")String incr_id);
 
 
+    /**
+     * 购买方式
+     */
+    @FormUrlEncoded
+    @POST("order/buy_type")
+    Observable<BaseResponseEntity<BuyTyle>> buyTyle(@Header("token") String token, @Field("type")String type);
+    /**
+     * 支付方式
+     */
+    @FormUrlEncoded
+    @POST("order/pay_type")
+    Observable<BaseResponseEntity<PayTyle>> payTyle(@Header("token") String token,@Field("type") String type);
 }
 
 

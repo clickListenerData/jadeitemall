@@ -45,7 +45,7 @@ class BindPhoneActivity : BaseMvpActivity<BindPhonePresenter>(),BindPhoneContrac
         finish()
     }
     override fun bindPhone(login: Login) {
-        if (login.is_phone.equals("1")){
+        if (login.is_phone==1){
             showBindDialog()
         }else{
             Constants.putToken(login.token)
@@ -57,6 +57,7 @@ class BindPhoneActivity : BaseMvpActivity<BindPhonePresenter>(),BindPhoneContrac
 
     override fun getCode() {
         dismissLoadingDialog()
+        showToast("发送成功")
         mHandler.sendEmptyMessage(1)
     }
 

@@ -11,6 +11,22 @@ import com.weibiaogan.litong.extensions.ui
  * describe:
  */
 class ImOrderPresenter:ImOrderContract.Presenter() {
+    override fun getPayTyle(token: String,type:String) {
+        getModel().getPayTyle(token,type).ui({
+            getView()?.getPayTyle(it.data!!)
+        },{
+            getView()?.showToast(it)
+        })
+    }
+
+    override fun getBuyTyle(token: String, type: String) {
+        getModel().getBuyTyle(token,type).ui({
+            getView()?.getBuyTyle(it.data!!)
+        },{
+            getView()?.showToast(it)
+        })
+    }
+
     override fun getOrderInfo(token: String, send: String, live: String, cabinet: String,incr_type1:String,incr_type2:String,incr_type3:String,freight_pay:String) {
         getModel().getOrderInfo(token,send,live,cabinet,incr_type1,incr_type2,incr_type3,freight_pay).ui({
             getView()?.getOrderInfo(it.data!!)

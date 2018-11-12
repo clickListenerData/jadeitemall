@@ -1,6 +1,7 @@
 package com.microple.jademall.ui.Personal.mvp.model
 
 import com.microple.jademall.bean.Pay
+import com.microple.jademall.bean.PayTyle
 import com.microple.jademall.bean.Pick
 import com.microple.jademall.common.AppApi
 import com.microple.jademall.ui.Personal.mvp.contract.PickGoodsContract
@@ -14,6 +15,8 @@ import io.reactivex.Observable
  * describe:
  */
 class PickGoodsModel: PickGoodsContract.Model {
+    override fun getPayTyle(token: String, type: String)=AppApi.Api().payTyle(token,type)
+
     override fun pay(token: String, pay_type: String, address_id: String, cabinet_id: String, shipping_pay: String)=AppApi.Api().getPick(token,pay_type,address_id,cabinet_id,shipping_pay)
 
 
